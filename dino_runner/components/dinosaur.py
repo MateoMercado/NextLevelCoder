@@ -3,13 +3,14 @@ import pygame
 
 from dino_runner.utils.message import Message
 from .power_ups.shield import Shield
-from dino_runner.utils.constants import DEFAULT_TYPE,DUCKING_SHIELD, JUMPING_SHIELD, RUNNING, JUMPING, DUCKING, RUNNING_SHIELD, SHIELD_TYPE
+from .power_ups.hammer import Hammer
+from dino_runner.utils.constants import DEFAULT_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING, JUMPING, DUCKING, RUNNING_SHIELD, SHIELD_TYPE, HAMMER_TYPE, DUCKING_HAMMER, JUMPING_HAMMER, RUNNING_HAMMER
 
 from pygame.sprite import Sprite
 
-DUCK_IMG = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
-JUMP_IMG = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD}
-RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
+DUCK_IMG = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD, HAMMER_TYPE: DUCKING_HAMMER}
+JUMP_IMG = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD, HAMMER_TYPE: JUMPING_HAMMER}
+RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD, HAMMER_TYPE: RUNNING_HAMMER}
 
 class Dinosaur(Sprite):
     X_POS = 80
@@ -36,6 +37,9 @@ class Dinosaur(Sprite):
         self.shield = False
         self.show_text = False
         self.shield_time_up = 0
+        self.hammer = False
+        self.show_text = False
+        self.hammer_time_up = 0
 
     def update(self, user_input):
         if self.dino_duck:
@@ -60,7 +64,6 @@ class Dinosaur(Sprite):
             self.dino_jump = False
             self.dino_run = True
             self.dino_duck = False
-       
 
     def run(self):
         self.image = RUN_IMG[self.type][self.step_index // 5]
@@ -101,6 +104,22 @@ class Dinosaur(Sprite):
             else:
                 self.shield = False
                 self.type = DEFAULT_TYPE
+
+    def destruccion(self, screen):
+        if self.hammer:
+            time_to_show = round((self.hammer_time_up - pygame.time.get_ticks()) / 1000, 2)
+            if time_to_show >= 0 and self.show_text:
+                Message(
+                    f"Hammer enabled for {time_to_show}",
+                    screen,
+                    font_size = 18,
+                    posXcenter = 500, 
+                    posYcenter = 40
+                )
+            else:
+                self.hammer = False
+                self.type = DEFAULT_TYPE
+
 
     ##<>   
 

@@ -1,3 +1,4 @@
+
 from email import message
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
@@ -108,6 +109,8 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 self.run()
                 self.death_count += 1
+            
+            
     ##<>   
 
     def show_menu(self):
