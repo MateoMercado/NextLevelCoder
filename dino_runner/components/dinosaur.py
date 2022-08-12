@@ -95,7 +95,7 @@ class Dinosaur(Sprite):
             time_to_show = round((self.shield_time_up - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0 and self.show_text:
                 Message(
-                    f"Shield enabled for {time_to_show}",
+                    f"Power Up enabled for {time_to_show}",
                     screen,
                     font_size = 18,
                     posXcenter = 500, 
@@ -110,7 +110,7 @@ class Dinosaur(Sprite):
             time_to_show = round((self.hammer_time_up - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0 and self.show_text:
                 Message(
-                    f"Hammer enabled for {time_to_show}",
+                    f"Power Up enabled for {time_to_show}",
                     screen,
                     font_size = 18,
                     posXcenter = 500, 

@@ -1,5 +1,6 @@
 
 from email import message
+import sys
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstaculos.obstacle_manager import Obstacle_manager
@@ -60,6 +61,7 @@ class Game:
     def update(self):
         self.update_score()
         self.player.check_invinsibility(self.screen)
+        self.player.destruccion(self.screen)
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
@@ -77,6 +79,7 @@ class Game:
         self.draw_score()
         self.player.draw(self.screen)
         self.player.check_invinsibility(self.screen)
+        self.player.destruccion(self.screen)
         self.obstacle_manager.drawn(self.screen)
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
@@ -114,7 +117,7 @@ class Game:
     ##<>   
 
     def show_menu(self):
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((255, 215, 0))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
      

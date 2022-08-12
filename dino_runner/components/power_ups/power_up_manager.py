@@ -2,7 +2,7 @@ import random
 import pygame
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.hammer import Hammer
-
+number = random.randint(0, 3)
 class PowerUpsManager():
     def __init__(self):
         self.power_ups = []
@@ -13,10 +13,10 @@ class PowerUpsManager():
         if len(self.power_ups) == 0:
             if self.when_appears == points:
                 if number % 2 == 0:
-                    self.when_appears = random.randint(self.when_appears + 200, self.when_appears + 600)
+                    self.when_appears = random.randint(self.when_appears + 200, self.when_appears + 300)
                     self.power_ups.append(Shield())
                 else:
-                    self.when_appears = random.randint(self.when_appears + 200, self.when_appears + 600)
+                    self.when_appears = random.randint(self.when_appears + 200, self.when_appears + 300)
                     self.power_ups.append(Hammer())
 
     def update(self, points, game_speed, player):
@@ -41,4 +41,4 @@ class PowerUpsManager():
 
     def reset_power_ups(self):
         self.power_ups = []
-        self.when_appears = random.randint(200, 600)
+        self.when_appears = random.randint(200, 300)
