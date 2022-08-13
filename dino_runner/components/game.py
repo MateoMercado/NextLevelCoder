@@ -109,9 +109,13 @@ class Game:
                 self.playing = False
                 self.playing = False
 
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
                 self.run()
                 self.death_count += 1
+            
             
             
     ##<>   
